@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+    margin-left: 10%; 
+    margin-right: 50%;
+    
+}
+div {
+    margin-left: 10%; 
+    margin-right: 10%; 
+
+}
+
+div.a {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  position: relative;
+  animation-name: gingerbread;
+  animation-duration: 5s;
+  animation-direction: forward;  
+}
+div.b {
+  width: auto;
+  background-image:url("https://st2.depositphotos.com/1526816/5742/v/950/depositphotos_57427667-stock-illustration-christmas-board-game.jpg");  
+
+}
+
+h2 {
+  text-shadow: 2px 2px 5px red;
+}
+
+img.c {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+img.a {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  background-color: transparent;
+}
+
+@keyframes gingerbread {
+  0%   {background-color:transparent; left:400px; top:0px;}
+  100%  {background-color:transparent; left:0px; top:0px;}
+
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+
+}
+
+table.center {
+  margin-left: auto; 
+
+}
+
+td, th {
+  border: 0px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr {
+  background-color: #36454F;
+  color: white;
+  }
+</style>
+</head>
+
+<body>
+<div style="text-align:center"><iframe id="cookie" src="https://giphy.com/embed/quwzrRZ2FZuDEPeuOx" width="150" height="180" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/att-dancing-holidays-attholidaygifs-quwzrRZ2FZuDEPeuOx"></a></p>
+<button id="startgame" onClick="startGame()" style="text-align:center;background-color:transparent;border:transparent;color:black;font-size:300%">Start</button>
+</div>
+
+<!-- Controller -->
+<div style="text-align:center;max-width:500px;">
+<p id="crash" style="background-color:red;color:white;font-size:32px;"></p>
+<p id="gscore" style="color:black;font-size:24px;"></p>
+<table class="center">
+<tr style="text-align:center;background-color:#D3D3D3;">
+<td>
+<table>
+<tr style="text-align:center;background-color:#000000;">
+<td>
+
+<table>
+ <tr>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+
+  </tr>
+  <tr>
+    <td> </td>
+    <td style="text-align:center;background-color:#D3D3D3;"><button style="color:white;border:0px; background-color:#D3D3D3;" onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">U</button></td>
+    <td> </td>
+    <td style="text-align:center;"><button style="color:#D3D3D3;border:1px; background-color:#D3D3D3;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">000000000</button></td>
+    <td style="text-align:center;"><button style="color:#D3D3D3;border:1px; background-color:#D3D3D3;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">000000000</button></td>
+    <td> </td>
+    <td style="text-align:center;color:red;">Spacetendo</td>
+
+  </tr>
+  <tr>
+    <td style="text-align:center;background-color:#D3D3D3;"><button style="color:white;border:0px; background-color:#D3D3D3;" onmousedown="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">L</button></td>
+    <td style="background-color:#D3D3D3;"></td>
+    <td style="text-align:center;background-color:#D3D3D3;"><button style="color:white;border:0px; background-color:#D3D3D3;" onmousedown="moveright()" onmouseup="clearmove()" ontouchstart="moveright()">R</button></td>
+    <td style="text-align:center"><button style="color:#D3D3D3;border:1px; background-color:#D3D3D3;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">000000000</button></td>
+    <td style="text-align:center"><button style="color:#D3D3D3;border:1px; background-color:#D3D3D3;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">000000000</button></td>
+    <td> </td>
+    <td> </td>
+
+  </tr>
+  <tr>
+    <td> </td>
+    <td style="text-align:center;background-color:#D3D3D3;"><button style="border:0px;color:white;background-color:#D3D3D3;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">D</button></td>
+    <td> </td>
+    <td style="text-align:center;background-color:#36454F;"><button style="color:#D3D3D3;border:1px; background-color:#D3D3D3;" onClick="restartGame()" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">0<mark style="background-color:black;color:white;">ReStart</mark>00</button></td>
+    <td style="text-align:center;background-color:  background-color:#36454F;"><button style="color:#D3D3D3;border:1px; background-color:#D3D3D3;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">00<mark style="background-color:black;color:white;">_Info_</mark>00</button></td>
+    <td style="text-align:center;"><button style="background-color:red;border-radius:50%;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">A</button></td>
+    <td style="text-align:center;"><button style="background-color:red;border-radius:50%;" onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">B</button></td>
+
+  </tr>
+  <tr>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+</tr></table>
+  </td></tr></table>
+  
+  <p style="text-align:center;color:black;">Use the controller arrow keys to move the Gingerbread man through the obstacles.</p>
+  </td></tr></table>
+</div>
+
+<script>
+
+var myGamePiece;
+var myObstacles = [];
+var myScore;
+var myBackground;
+var z;
+
+
+function startGame() {
+    myGamePiece = new component(30, 30, "https://media.tenor.com/lcFyDntKe3MAAAAi/cookie-run-cookie-run-ovenbreak.gif", 10, 120, "image");
+    myScore = new component("30px", "Consolas", "transparent", 40, 350, "text");
+    myGameArea.start();
+    myBackground = new component(700, 450, "https://cdn.pixabay.com/photo/2015/10/28/22/04/wintry-1011476_1280.jpg", 0, 0, "image");
+
+  var x = document.getElementById("startgame");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  
+  var y = document.getElementById("cookie");
+  if (y.style.display === "none") {
+    y.style.display = "block";
+  } else {
+    y.style.display = "none";
+  }
+
+}
+
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 700;
+        this.canvas.height = 450;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+        
+        if (type == "image") {
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+    
+}
+
+function updateGameArea() {
+	
+    var x, y, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            myGameArea.stop();
+             y = document.getElementById("crash").innerHTML = "CRASH!";
+            return;
+        } 
+    }
+    
+    myGameArea.clear();
+    myBackground.newPos();    
+    myBackground.update();
+
+    myGameArea.frameNo += 1;
+    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+        x = myGameArea.canvas.width;
+        minHeight = 20;
+        maxHeight = 140;
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 100;
+        maxGap = 220;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        myObstacles.push(new component(35, height, "https://cdn.pixabay.com/photo/2022/06/26/19/27/candy-cane-7286176_1280.png", x, 0, "image"))
+        myObstacles.push(new component(150, x - height - gap, "https://cdn.pixabay.com/photo/2016/12/01/01/59/christmas-1874292_1280.png", x, height + gap, "image"));
+    } 
+    
+    for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].speedX = -1;
+        myObstacles[i].newPos();
+        myObstacles[i].update();
+        
+        if (i>10) {
+        	myObstacles[i].speedX = -4;
+            myObstacles[i].newPos();
+        	myObstacles[i].update();
+        }
+        if (i>20) {
+        	myObstacles[i].speedX = -8;
+            myObstacles[i].newPos();
+            myObstacles[i].update();
+        }
+        if (i>30) {
+        	myObstacles[i].speedX = -12;
+            myObstacles[i].newPos();
+            myObstacles[i].update();
+        }
+        if (i>40) {
+        	myObstacles[i].speedX = -16;
+            myObstacles[i].newPos();
+            myObstacles[i].update();
+        }
+    }
+    
+    var z = document.getElementById("gscore").innerHTML = myScore.text=" SCORE: " + myGameArea.frameNo;
+    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.update();
+    myGamePiece.newPos();    
+    myGamePiece.update();
+}
+
+function restartGame() {
+
+    myGameArea.stop();
+    myGameArea.clear();
+    myBackground.newPos();    
+    myBackground.update();
+    myGamePiece.newPos();    
+    myGamePiece.update();
+    myGameArea.start();
+
+}
+    
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function moveup() {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove() {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+
+</script>
+</body>
+</html>
